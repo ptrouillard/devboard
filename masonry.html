@@ -1,0 +1,67 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+	  $(document).ready(function() {
+	  	 
+	  	Storage.prototype.setObject = function(key, value) {
+		    this.setItem(key, JSON.stringify(value));
+		}
+
+		Storage.prototype.getObject = function(key) {
+		    return JSON.parse(this.getItem(key));
+		}
+
+	  	  // init iframe
+	  	  var url = localStorage.getItem("central_url");
+	  	  $("#central").attr("src", url);
+
+	  	  // change url
+	  	  $(".nav").click(function() {
+	  	  	var url = $(this).val();
+	  	  	// put the url inside the iframe
+	  	  	localStorage.setItem("central_url", url);
+	  	  	$("#central").attr("src", url);
+	  	  	//document.location.reload();
+	  	  });
+
+	  	  $(".nav--more").click(function() {
+	  	  	$("#newurl").val();
+	  	  	$('#ask_urlname_to_pop_up').bPopup({
+           	 	fadeSpeed: 'slow', 
+            	followSpeed: 1500, 
+            	modalColor: 'greenYellow'
+        });
+	  	  });
+	  });
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.min.js"></script>
+	<script src="jquery.bpopup.min.js"></script>
+	<style>
+	.grid-item { width:200px; background-color: #fefefe;}
+	.grid-item--width2 { width:800px; background-color: grey;}
+	</style>
+</head>
+
+<body>
+	<div class="grid js-masonry" data-masonry-options='{ "itemSelector": ".grid-item", "columWidth": 200 }'>
+	  <div class="grid-item"><iframe src=""></iframe></div>
+	  <div class="grid-item grid-item--width2">
+	  		<button type="button" class="nav" value="http://www.w3schools.com/jquery/jquery_examples.asp">jQuery examples</button>
+	  		<button type="button" class="nav" value="https://siinantes.slack.com/messages/general/">Slack</button>
+	  		<button type="button" class="nav" value="http://www.trello.com">Trello</button>
+	  		<input type="text" id="newurl" placeholder="Enter the url here ..."></input>
+	  		<button type="button" class="nav--more">+</button>
+	  </div>
+	  <div class="grid-item grid-item--width2"><iframe id="central" src="http://www.google.fr" width="800" height="800"></iframe></div>
+	  <div class="grid-item">Etiam nec elit in nibh mattis tempor ac id massa. Nunc elementum mauris nisl. Maecenas luctus hendrerit elit et venenatis. Aliquam laoreet mattis aliquet. Quisque mollis, metus vel aliquet gravida, elit sapien cursus neque, quis hendrerit nibh massa quis sapien. Fusce ultricies ultricies dui. In risus tortor, auctor non sodales et, tristique id libero. Vivamus nisi libero, posuere eget dignissim eget, vehicula vel diam. Ut sit amet nulla ultrices, scelerisque ante id, condimentum nibh. Donec posuere lorem sed lectus fermentum sollicitudin.
+
+</div>
+	</div>
+
+<div style="display: none; width: 200px; height: 200px;" id="ask_urlname_to_pop_up">Name of the url : <input type="text" id="urlname" placeholder="Enter the nale if this url..."></input></div>
+
+</body>
+
+
+</html>
